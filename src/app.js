@@ -161,11 +161,11 @@ const closeNoteView = () => {
 
 const notePage = () => {
   noteArea.innerHTML = ""
+  btn.innerHTML = '<i class="fa-solid fa-circle-plus">'
 }
 
 const removeTextArea = () => {
-  const clearButton = document.getElementById("cancelBtn")
-  clearButton.addEventListener("click", notePage)
+  notePage()
 
 }
 
