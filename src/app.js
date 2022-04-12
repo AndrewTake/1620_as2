@@ -81,7 +81,7 @@ const noteArea = document.querySelector(".write-note-area")
 const themeButton = document.querySelector(".theme-toggle")
 const btn = document.querySelector(".icons")
 const isLightModeOn = false;
-const checked = false;
+
 
 
 const TextArea =
@@ -180,23 +180,6 @@ function clearNote() {
 }
 
 
-// function darkMode() {
-//   const darkButton = document.querySelector(".theme-toggle")
-//   console.log(darkButton.checked)
-//   darkButton.addEventListener("click", switchMode)
-// }
-
-// const switchMode = () => {
-//   console.log('swithmode')
-//   isLightModeOn = !isLightModeOn
-//   const container = document.querySelector(".main-container")
-//   if (isLightModeOn == false) {
-//     container.classList.replace("light-theme", "dark-theme")
-//   } else {
-//     container.classList.replace("dark-theme", "light-theme")
-//   }
-// }
-
 let darkTheme = () => {
   let switchDarkTheme = document.querySelector(".main-container");
   switchDarkTheme.classList.replace("light-theme", "dark-theme");
@@ -210,152 +193,21 @@ const lightTheme = () => {
 
 
 function darkMode() {
-  const darkButton = document.querySelector(".theme-toggle")
-  darkButton.addEventListener("click", () => {
-    if (checked == false) {
-      darkTheme()
-      checked = true
-    } else {
-      lightTheme()
-      checked = false
-    }
-  })
+  if (isLightModeOn == false) {
+    darkTheme()
+    isLightModeOn = true
+  } else {
+    lightTheme()
+    isLightModeOn = false
+  }
 }
 
-// const darkMode1 = () => {
-//   container.classList.replace("light-theme", "dark-theme")
-//       checked = true
-
-// }
-
-// const lightMode  = () => {
-//   container.classList.replace("dark-theme", "light-theme")
-//   checked = false
-// }
 
 
-darkMode()
 
 
 displayNotes()
 
-themeButton.addEventListener("click", () => {
-  if (checked == false) {
-    darkTheme()
-    checked = true
-  } else {
-    lightTheme()
-    checked = false
-  }
-})
 
 
 
-
-// saveNote = () => {
-//   splitNote()
-//   notes.push({ title: titleAndBody[0], noteBody: titleAndBody[1], class: notes.length + 1 })
-//   noteID = noteID + 1;
-//   addToSideNav(noteTitle, note)
-// }
-
-
-
-// function addToSideNav() {
-//   const noteList = document.querySelector(".notes-list")
-//   noteList.innerHTML = ""
-//   for (const note of notes) {
-//     const li = document.createElement("li")
-//     li.className = "saved-note"
-//     li.setAttribute("id", note.id)
-//     li.appendChild(document.createTextNode(note.title))
-//     noteList.appendChild(li)
-//   }
-//   document.querySelectorAll(".saved-note").forEach((item) => {
-//     item.addEventListener("click", viewNote)
-//   })
-// }
-
-
-
-
-// let checked = false
-
-
-// function getNoteText() {
-//   const noteObject = document.getElementById("note")
-//   const note = noteObject.value
-//   return note
-// }
-
-// function getNoteTitleAndBody() {
-//   const noteText = getNoteText().split("\n")
-//   const title = noteText[0]
-//   const body = noteText.splice(1)
-//   const bodyFinal = body.join("\n")
-//   const titleAndBody = [title, bodyFinal]
-//   return titleAndBody
-// }
-
-// function displayNotes() {
-//   const noteList = document.querySelector(".notes-list")
-//   noteList.innerHTML = ""
-//   for (const note of notes) {
-//     const li = document.createElement("li")
-//     li.className = "saved-note"
-//     li.setAttribute("id", note.id)
-//     li.appendChild(document.createTextNode(note.title))
-//     noteList.appendChild(li)
-//   }
-//   document.querySelectorAll(".saved-note").forEach((item) => {
-//     item.addEventListener("click", viewNote)
-//   })
-// }
-
-// function notePage() {
-//   noteArea.innerHTML = ""
-// }
-
-// function saveNote() {
-//   const saveButton = document.getElementById("save")
-//   saveButton.addEventListener("click", () => {
-//     const titleAndBody = getNoteTitleAndBody()
-//     if (titleAndBody[0] != "") {
-//       notes.push({ title: titleAndBody[0], noteBody: titleAndBody[1], id: notes.length + 1 })
-//       displayNotes()
-//     }
-//     notePage()
-//   })
-// }
-
-// function newNote() {
-//   noteArea.innerHTML = "<textarea rows='20' cols='40' placeholder='Start writing here' id='note'></textarea><button id=save>save</button><button id=delete>delete</button>"
-// }
-
-// function clearNote() {
-//   const clearButton = document.getElementById("delete")
-//   clearButton.addEventListener("click", notePage)
-// }
-
-// function closeNoteView() {
-//   const viewingArea = document.querySelector(".read-note-area")
-//   viewingArea.innerHTML = ""
-// }
-
-// function viewNote(evt) {
-//   const viewingArea = document.querySelector(".read-note-area")
-//   const note = notes[parseInt(evt.currentTarget.id) - 1]
-//   const body = note.noteBody
-//   viewingArea.innerHTML = `<button id=close-view>close</button><p>${body}</p>`
-//   const closeView = document.getElementById("close-view")
-//   closeView.addEventListener("click", () => {
-//     closeNoteView()
-//   })
-// }
-// btn.addEventListener("click", () => {
-//   if (noteArea.innerHTML.length <= 11) {
-//     newNote()
-//     clearNote()
-//     saveNote()
-//   }
-// })
