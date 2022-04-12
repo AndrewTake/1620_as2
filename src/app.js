@@ -78,7 +78,10 @@ const notes = [
 
 const readArea = document.querySelector(".read-note-area")
 const noteArea = document.querySelector(".write-note-area")
+const themeButton = document.querySelector(".theme-toggle")
 const btn = document.querySelector(".icons")
+const isLightModeOn = false;
+const checked = false;
 
 
 const TextArea =
@@ -109,6 +112,8 @@ const actionNote = () => {
   btn.innerHTML = ''
 }
 btn.addEventListener('click', actionNote)
+themeButton.addEventListener("click", darkMode)
+
 
 const saveNote = (e) => {
   const noteObject = document.getElementById("newNote")
@@ -142,7 +147,8 @@ const displayNotes = () => {
 
 const viewNote = (evt) => {
   const viewingArea = document.querySelector(".read-note-area")
-  const note = notes[parseInt(evt.currentTarget.id) - 1]
+  const note = notes[evt.currentTarget.id - 1]
+  // finding the clicked note in our stored list of notes
   const body = note.noteBody
   viewingArea.innerHTML = `<button id=close-view>close</button><p>${body}</p>`
   const closeView = document.getElementById("close-view")
@@ -174,9 +180,74 @@ function clearNote() {
 }
 
 
+// function darkMode() {
+//   const darkButton = document.querySelector(".theme-toggle")
+//   console.log(darkButton.checked)
+//   darkButton.addEventListener("click", switchMode)
+// }
+
+// const switchMode = () => {
+//   console.log('swithmode')
+//   isLightModeOn = !isLightModeOn
+//   const container = document.querySelector(".main-container")
+//   if (isLightModeOn == false) {
+//     container.classList.replace("light-theme", "dark-theme")
+//   } else {
+//     container.classList.replace("dark-theme", "light-theme")
+//   }
+// }
+
+let darkTheme = () => {
+  let switchDarkTheme = document.querySelector(".main-container");
+  switchDarkTheme.classList.replace("light-theme", "dark-theme");
+}
+
+const lightTheme = () => {
+  let switchLightTheme = document.querySelector(".main-container");
+  switchLightTheme.classList.replace("dark-theme", "light-theme");
+}
 
 
 
+function darkMode() {
+  const darkButton = document.querySelector(".theme-toggle")
+  darkButton.addEventListener("click", () => {
+    if (checked == false) {
+      darkTheme()
+      checked = true
+    } else {
+      lightTheme()
+      checked = false
+    }
+  })
+}
+
+// const darkMode1 = () => {
+//   container.classList.replace("light-theme", "dark-theme")
+//       checked = true
+
+// }
+
+// const lightMode  = () => {
+//   container.classList.replace("dark-theme", "light-theme")
+//   checked = false
+// }
+
+
+darkMode()
+
+
+displayNotes()
+
+themeButton.addEventListener("click", () => {
+  if (checked == false) {
+    darkTheme()
+    checked = true
+  } else {
+    lightTheme()
+    checked = false
+  }
+})
 
 
 
