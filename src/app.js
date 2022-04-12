@@ -86,28 +86,26 @@ const TextArea =
   <textarea name="newNote" id='newNote' class="newNote" cols="200" rows="50"
   placeholder="Welcome to Andrews Note Pad :) Write here. "></textarea>
   <button class='saveBtn' id=save>save</button>
-  <button class="clearBtn" type="submit" value="clear the doc"
+  <button class="clearBtn" id='clearBtn' type="submit" value="clear the doc"
   >Clear</button>
   <button class="cancelBtn" id='cancelBtn' type="reset" value="reset the doc"
   >Cancel</button>
   `
 
-const justAddButton = () => {
 
-}
 
 const actionNote = () => {
   console.log('click here')
   noteArea.innerHTML = TextArea
 
-  const cancelBtn = document.querySelector('.cancelBtn')
+  const cancelBtn = document.getElementById('cancelBtn')
   cancelBtn.addEventListener('click', removeTextArea)
 
   const saveButton = document.getElementById("save")
   saveButton.addEventListener('click', saveNote)
 
-  // const clearBtn = document.querySelector('.clearBtn')
-  // clearBtn.addEventListener('click', clearNote)
+  const clearBtn = document.getElementById('clearBtn')
+  clearBtn.addEventListener('click', clearNote)
   btn.innerHTML = ''
 }
 btn.addEventListener('click', actionNote)
@@ -142,6 +140,25 @@ const displayNotes = () => {
   })
 }
 
+const viewNote = (evt) => {
+  const viewingArea = document.querySelector(".read-note-area")
+  const note = notes[parseInt(evt.currentTarget.id) - 1]
+  const body = note.noteBody
+  viewingArea.innerHTML = `<button id=close-view>close</button><p>${body}</p>`
+  const closeView = document.getElementById("close-view")
+  closeView.addEventListener("click", () => {
+    closeNoteView()
+  })
+}
+
+
+const closeNoteView = () => {
+  const viewingArea = document.querySelector(".read-note-area")
+  viewingArea.innerHTML = ""
+}
+
+
+
 const notePage = () => {
   noteArea.innerHTML = ""
 }
@@ -152,6 +169,9 @@ const removeTextArea = () => {
 
 }
 
+function clearNote() {
+  actionNote()
+}
 
 
 
