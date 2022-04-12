@@ -68,7 +68,6 @@
 
 // CODE
 
-
 const notes = [
   {
     title: "first note",
@@ -80,32 +79,33 @@ const notes = [
 const readArea = document.querySelector(".read-note-area")
 const noteArea = document.querySelector(".write-note-area")
 const btn = document.querySelector(".icons")
+const TextArea = `
+<textarea name="newNote" id="newNote" cols="200" rows="50" 
+placeholder="Welcome to Andrews Note Pad :) Write here. "></textarea>
+<button class="cancelBtn" type="reset" value="reset the doc"
+>Cancel</button>
+<button class="saveBtn" type="submit" value="submit the doc"
+>Save</button>
+`
 
 const actionNote = () => {
-  const textArea = `
-  <textarea name="newNote" id="newNote" cols="200" rows="50" 
-  placeholder="Welcome to Andrews Note Pad :) Write here. "></textarea>
-  <button id="saveBtn" type="submit" value="submit the doc"
-  >Save</button>
-  <button id="cancelBtn" type="reset" value="reset the doc"
-  >Cancel</button>
-  <button id="clearBtn" type="reset" value="clear the doc"
-  >Clear</button>
-  `
-  const cancelBtn = document.querySelector('#cancelBtn')
-  cancelBtn.addEventListener('click', removeNote)
-  const saveBtn = document.querySelector('#saveBtn')
+
+
+  noteArea.insertAdjacentHTML('beforeend', TextArea)
+
+  const cancelBtn = document.querySelector('.cancelBtn')
+  cancelBtn.addEventListener('click', removeTextArea)
+
+  const saveBtn = document.querySelector('.saveBtn')
   saveBtn.addEventListener('click', saveNote)
-  const clearBtn = document.querySelector('#clearBtn')
-  clearBtn.addEventListener('click', clearNote)
-  noteArea.insertAdjacentHTML("beforeend", noteTemplate)
+
   btn.innerHTML = ''
 }
+btn.addEventListener('click', actionNote)
 
 
 
-
-function save() {
+const save = () => {
   const noteText = getNoteText().split("\n")
   const title = noteText[0]
   const body = noteText.splice(1)
