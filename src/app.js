@@ -80,14 +80,15 @@ const readArea = document.querySelector(".read-note-area")
 const noteArea = document.querySelector(".write-note-area")
 const btn = document.querySelector(".icons")
 const TextArea = `
-<textarea name="newNote" id="newNote" cols="200" rows="50" 
+<textarea name="newNote" id="newNote" cols="200" rows="50"
 placeholder="Welcome to Andrews Note Pad :) Write here. "></textarea>
-<button class="cancelBtn" type="reset" value="reset the doc"
->Cancel</button>
 <button class="saveBtn" type="submit" value="submit the doc"
 >Save</button>
+<button class="clearBtn" type="submit" value="clear the doc"
+>Clear</button>
+<button class="cancelBtn" type="reset" value="reset the doc"
+>Cancel</button>
 `
-
 const actionNote = () => {
 
 
@@ -99,13 +100,16 @@ const actionNote = () => {
   const saveBtn = document.querySelector('.saveBtn')
   saveBtn.addEventListener('click', saveNote)
 
+  const clearBtn = document.querySelector('.clearBtn')
+  clearBtn.addEventListener('click', clearNote)
+
   btn.innerHTML = ''
 }
 btn.addEventListener('click', actionNote)
 
 
 
-const save = () => {
+const saveNote = () => {
   const noteText = getNoteText().split("\n")
   const title = noteText[0]
   const body = noteText.splice(1)
@@ -120,7 +124,7 @@ const displayNote = () => {
 }
 
 
-const clearNote = document.querySelector('#clearBtn');
+const clearNote = document.querySelector('.clearBtn');
 
 clearTheCopies.addEventListener('click', event => {
   copyContainer.innerHTML = ''
