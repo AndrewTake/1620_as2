@@ -79,54 +79,192 @@ const notes = [
 const readArea = document.querySelector(".read-note-area")
 const noteArea = document.querySelector(".write-note-area")
 const btn = document.querySelector(".icons")
-const TextArea = `
-<textarea name="newNote" id="newNote" cols="200" rows="50"
-placeholder="Welcome to Andrews Note Pad :) Write here. "></textarea>
-<button class="saveBtn" type="submit" value="submit the doc"
->Save</button>
-<button class="clearBtn" type="submit" value="clear the doc"
->Clear</button>
-<button class="cancelBtn" type="reset" value="reset the doc"
->Cancel</button>
-`
+
+
+const TextArea =
+  `
+  <textarea name="newNote" id='newNote' class="newNote" cols="200" rows="50"
+  placeholder="Welcome to Andrews Note Pad :) Write here. "></textarea>
+  <button class='saveBtn' id=save>save</button>
+  <button class="clearBtn" type="submit" value="clear the doc"
+  >Clear</button>
+  <button class="cancelBtn" id='cancelBtn' type="reset" value="reset the doc"
+  >Cancel</button>
+  `
+
+const justAddButton = () => {
+
+}
+
 const actionNote = () => {
-
-
-  noteArea.insertAdjacentHTML('beforeend', TextArea)
+  console.log('click here')
+  noteArea.innerHTML = TextArea
 
   const cancelBtn = document.querySelector('.cancelBtn')
   cancelBtn.addEventListener('click', removeTextArea)
 
-  const saveBtn = document.querySelector('.saveBtn')
-  saveBtn.addEventListener('click', saveNote)
+  const saveButton = document.getElementById("save")
+  saveButton.addEventListener('click', saveNote)
 
-  const clearBtn = document.querySelector('.clearBtn')
-  clearBtn.addEventListener('click', clearNote)
-
+  // const clearBtn = document.querySelector('.clearBtn')
+  // clearBtn.addEventListener('click', clearNote)
   btn.innerHTML = ''
 }
 btn.addEventListener('click', actionNote)
 
-
-
-const saveNote = () => {
-  const noteText = getNoteText().split("\n")
+const saveNote = (e) => {
+  const noteObject = document.getElementById("newNote")
+  const noteText = noteObject.value.split("\n")
   const title = noteText[0]
   const body = noteText.splice(1)
   const bodyFinal = body.join("\n")
   const titleAndBody = [title, bodyFinal]
-  return titleAndBody
+  if (title.length != 0) {
+    notes.push({ title: titleAndBody[0], noteBody: titleAndBody[1], id: notes.length + 1 })
+    displayNotes()
+  }
+  notePage()
+
+}
+
+const displayNotes = () => {
+  const noteList = document.querySelector(".notes-list")
+  noteList.innerHTML = ""
+  for (const note of notes) {
+    const li = document.createElement("li")
+    li.className = "saved-note"
+    li.setAttribute("id", note.id)
+    li.appendChild(document.createTextNode(note.title))
+    noteList.appendChild(li)
+  }
+  document.querySelectorAll(".saved-note").forEach((item) => {
+    item.addEventListener("click", viewNote)
+  })
+}
+
+const notePage = () => {
+  noteArea.innerHTML = ""
+}
+
+const removeTextArea = () => {
+  const clearButton = document.getElementById("cancelBtn")
+  clearButton.addEventListener("click", notePage)
+
 }
 
 
-const displayNote = () => {
-
-}
 
 
-const clearNote = document.querySelector('.clearBtn');
 
-clearTheCopies.addEventListener('click', event => {
-  copyContainer.innerHTML = ''
-})
 
+
+
+
+
+// saveNote = () => {
+//   splitNote()
+//   notes.push({ title: titleAndBody[0], noteBody: titleAndBody[1], class: notes.length + 1 })
+//   noteID = noteID + 1;
+//   addToSideNav(noteTitle, note)
+// }
+
+
+
+// function addToSideNav() {
+//   const noteList = document.querySelector(".notes-list")
+//   noteList.innerHTML = ""
+//   for (const note of notes) {
+//     const li = document.createElement("li")
+//     li.className = "saved-note"
+//     li.setAttribute("id", note.id)
+//     li.appendChild(document.createTextNode(note.title))
+//     noteList.appendChild(li)
+//   }
+//   document.querySelectorAll(".saved-note").forEach((item) => {
+//     item.addEventListener("click", viewNote)
+//   })
+// }
+
+
+
+
+// let checked = false
+
+
+// function getNoteText() {
+//   const noteObject = document.getElementById("note")
+//   const note = noteObject.value
+//   return note
+// }
+
+// function getNoteTitleAndBody() {
+//   const noteText = getNoteText().split("\n")
+//   const title = noteText[0]
+//   const body = noteText.splice(1)
+//   const bodyFinal = body.join("\n")
+//   const titleAndBody = [title, bodyFinal]
+//   return titleAndBody
+// }
+
+// function displayNotes() {
+//   const noteList = document.querySelector(".notes-list")
+//   noteList.innerHTML = ""
+//   for (const note of notes) {
+//     const li = document.createElement("li")
+//     li.className = "saved-note"
+//     li.setAttribute("id", note.id)
+//     li.appendChild(document.createTextNode(note.title))
+//     noteList.appendChild(li)
+//   }
+//   document.querySelectorAll(".saved-note").forEach((item) => {
+//     item.addEventListener("click", viewNote)
+//   })
+// }
+
+// function notePage() {
+//   noteArea.innerHTML = ""
+// }
+
+// function saveNote() {
+//   const saveButton = document.getElementById("save")
+//   saveButton.addEventListener("click", () => {
+//     const titleAndBody = getNoteTitleAndBody()
+//     if (titleAndBody[0] != "") {
+//       notes.push({ title: titleAndBody[0], noteBody: titleAndBody[1], id: notes.length + 1 })
+//       displayNotes()
+//     }
+//     notePage()
+//   })
+// }
+
+// function newNote() {
+//   noteArea.innerHTML = "<textarea rows='20' cols='40' placeholder='Start writing here' id='note'></textarea><button id=save>save</button><button id=delete>delete</button>"
+// }
+
+// function clearNote() {
+//   const clearButton = document.getElementById("delete")
+//   clearButton.addEventListener("click", notePage)
+// }
+
+// function closeNoteView() {
+//   const viewingArea = document.querySelector(".read-note-area")
+//   viewingArea.innerHTML = ""
+// }
+
+// function viewNote(evt) {
+//   const viewingArea = document.querySelector(".read-note-area")
+//   const note = notes[parseInt(evt.currentTarget.id) - 1]
+//   const body = note.noteBody
+//   viewingArea.innerHTML = `<button id=close-view>close</button><p>${body}</p>`
+//   const closeView = document.getElementById("close-view")
+//   closeView.addEventListener("click", () => {
+//     closeNoteView()
+//   })
+// }
+// btn.addEventListener("click", () => {
+//   if (noteArea.innerHTML.length <= 11) {
+//     newNote()
+//     clearNote()
+//     saveNote()
+//   }
+// })
