@@ -2,7 +2,8 @@
 
 // **create note taking area 4 points**
 
-// When the plus button is clicked a new note taking area is created below the plus button in the *create-note-area* (article in the HTML).
+// When the plus button is clicked a new note taking area is created below the plus button in the 
+// *create-note-area* (article in the HTML).
 
 // The note taking area includes:
 // - a textarea where the note will be written
@@ -14,7 +15,8 @@
 
 // **save a note 4 points**
 
-// when the “save” button in the note taking area is clicked the note is saved in the **notes** array, which has been created for you in app.js.
+// when the “save” button in the note taking area is clicked the note is saved in the 
+// **notes** array, which has been created for you in app.js.
 
 // note rules:
 // The first line of the note should be the title
@@ -25,7 +27,8 @@
 // ```
 
 // A new note is saved as an object with a **title**, a **noteBody** and an **id** 
-// (since you don’t have to delete notes you could use `notes.length + 1` to set the id, or get the value of the last note id and increment that `notes[-1].id + 1`
+// (since you don’t have to delete notes you could use `notes.length + 1` to set the id, 
+// or get the value of the last note id and increment that `notes[-1].id + 1`
 
 // after clicking the save button the note taking area should be removed.
 
@@ -78,12 +81,38 @@ const readArea = document.querySelector(".read-note-area")
 const noteArea = document.querySelector(".write-note-area")
 const btn = document.querySelector(".icons")
 
-const createNote = () => {
-
-
-
+const actionNote = () => {
+  const textArea = `
+  <textarea name="newNote" id="newNote" cols="200" rows="50" 
+  placeholder="Welcome to Andrews Note Pad :) Write here. "></textarea>
+  <button id="saveBtn" type="submit" value="submit the doc"
+  >Save</button>
+  <button id="cancelBtn" type="reset" value="reset the doc"
+  >Cancel</button>
+  <button id="clearBtn" type="reset" value="clear the doc"
+  >Clear</button>
+  `
+  const cancelBtn = document.querySelector('#cancelBtn')
+  cancelBtn.addEventListener('click', removeNote)
+  const saveBtn = document.querySelector('#saveBtn')
+  saveBtn.addEventListener('click', saveNote)
+  const clearBtn = document.querySelector('#clearBtn')
+  clearBtn.addEventListener('click', clearNote)
+  noteArea.insertAdjacentHTML("beforeend", noteTemplate)
+  btn.innerHTML = ''
 }
 
+
+
+
+function save() {
+  const noteText = getNoteText().split("\n")
+  const title = noteText[0]
+  const body = noteText.splice(1)
+  const bodyFinal = body.join("\n")
+  const titleAndBody = [title, bodyFinal]
+  return titleAndBody
+}
 
 
 const displayNote = () => {
@@ -91,24 +120,9 @@ const displayNote = () => {
 }
 
 
-originalContainer.forEach(function (element) {
-  // for each = for each element in list
-  element.addEventListener('click', event => {
-    if (event.target = 'div.original-container') {
-      copyContainer.insertAdjacentHTML("beforeend", event.target.innerHTML + ' ')
-      // insertAdjacentHTML(position, text), represents the position relative to the element
-      // innerHTML sets the HTML markup within an element, in this case, its being copied
-    }
-  })
-});
-// const displayNote = () => {
-//   noteArea = document.insertAdjacentHTML('write-note-area')
+const clearNote = document.querySelector('#clearBtn');
 
-//   const cancelBtn = document.querySelector('.cancelBtn')
-//   const saveBtn = document.querySelector('.saveBtn')
+clearTheCopies.addEventListener('click', event => {
+  copyContainer.innerHTML = ''
+})
 
-//   cancelBtn.addEventListener('click', cancelNote)
-//   saveBtn.addEventListener("click", saveNote)
-
-
-}
