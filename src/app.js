@@ -1,5 +1,6 @@
 const notes = [
   {
+    // object is between squiggly brackets
     title: "first note",
     noteBody: "this is an example note",
     id: 1
@@ -10,13 +11,14 @@ const readArea = document.querySelector(".read-note-area")
 const noteArea = document.querySelector(".write-note-area")
 const themeButton = document.querySelector(".theme-toggle")
 const btn = document.querySelector(".icons")
+// selecting classes from the HTML page
 const isLightModeOn = false;
 
 const TextArea =
   `
   <textarea name="newNote" id='newNote' class="newNote" cols="200" rows="50"
   placeholder="Welcome to Andrews Note Pad :) Write here. "></textarea>
-  <button class='saveBtn' id=save>save</button>
+  <button class='saveBtn' id=save>Save</button>
   <button class="clearBtn" id='clearBtn' type="submit" value="clear the doc"
   >Clear</button>
   <button class="cancelBtn" id='cancelBtn' type="reset" value="reset the doc"
@@ -37,6 +39,7 @@ const actionNote = () => {
   clearBtn.addEventListener('click', actionNote)
   btn.innerHTML = ''
 }
+
 btn.addEventListener('click', actionNote)
 themeButton.addEventListener("click", darkMode)
 
@@ -92,16 +95,16 @@ const justAddButton = () => {
   noteArea.innerHTML = ""
   btn.innerHTML = '<i class="fa-solid fa-circle-plus">'
 }
-
+// .toggle
 let darkTheme = () => {
   let switchDarkTheme = document.querySelector(".main-container");
-  switchDarkTheme.classList.replace("light-theme", "dark-theme");
+  switchDarkTheme.classList.toggle("dark-theme");
 }
 
-const lightTheme = () => {
-  let switchLightTheme = document.querySelector(".main-container");
-  switchLightTheme.classList.replace("dark-theme", "light-theme");
-}
+// const lightTheme = () => {
+//   let switchLightTheme = document.querySelector(".main-container");
+//   switchLightTheme.classList.replace("dark-theme", "light-theme");
+// }
 
 function darkMode() {
   if (isLightModeOn == false) {
